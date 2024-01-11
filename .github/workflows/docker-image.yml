@@ -13,6 +13,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v3s
     - name: Build the Docker image
       run: docker build . --file Dockerfile.dev --tag kinggstark/docker
+  
+  test:
+
+   runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: test the code
+      run: docker run kinggstark/docker npm run test -- --coverage
