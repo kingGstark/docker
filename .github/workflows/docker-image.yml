@@ -25,5 +25,5 @@ jobs:
     - name: pull & test image
       run: |
         echo "${{secrets.DOCKERPW}}" | docker login -u "kinggstark" --password-stdin
-        docker run -e CI=true kinggstark/docker npm run test CI=true -- --coverage
+        docker run -e CI=true kinggstark/docker npm run test -- --coverage
         
