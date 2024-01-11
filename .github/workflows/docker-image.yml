@@ -25,7 +25,7 @@ jobs:
     - name: pull & test image
       run: |
         echo "${{secrets.DOCKERPW}}" | docker login -u "kinggstark" --password-stdin
-        docker build -t kinggstark/docker
+        docker build kinggstark/docker
         docker run -e CI=true -t kinggstark/docker npm run test
         
 
