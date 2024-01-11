@@ -9,19 +9,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
-      - name: Build, tag, and push image
-        run: docker build . --file Dockerfile.dev --tag kinggstark/docker
-        run: docker push kinggstark/docker
-        run: echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
-  # build:
-  #   runs-on: ubuntu-latest
-
-    # steps:
-    #   - uses: actions/checkout@v3
-    #   - name: Build the Docker image
-    #     run: docker build . --file Dockerfile.dev --tag kinggstark/docker
-    #   - name: test
-    #     run: docker run -e CI=true kinggstark/docker npm run test -- --coverage
+    - uses: actions/checkout@v1
+    - name: build & push image
+    run: |
+    echo "${{secrets.DOCKERPW}}" | docker login -u "kinggstark" --password-stdin
+    docker image build -t kinggstark/docker .
+    docker push kinggstark/docker
