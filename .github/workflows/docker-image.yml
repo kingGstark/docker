@@ -16,3 +16,13 @@ jobs:
         echo "${{secrets.DOCKERPW}}" | docker login -u "kinggstark" --password-stdin
         docker image build -t kinggstark/docker .
         docker push kinggstark/docker
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: pull & test image
+      run: |
+        echo "${{secrets.DOCKERPW}}" | docker login -u "kinggstark" --password-stdin
+        docker run -e CI=true kinggstark/docker npm run test CI=true -- --coverage
+        
