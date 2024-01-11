@@ -15,4 +15,4 @@ jobs:
       - name: Build the Docker image
         run: docker build . --file Dockerfile.dev --tag kinggstark/docker
       - name: test
-        run: docker run kinggstark/docker npm run test -- --coverage
+        run: docker run -e CI=true kinggstark/docker npm run test -- --coverage
