@@ -2,26 +2,23 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3s
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile.dev --tag kinggstark/docker
-  
-  test:
+      - uses: actions/checkout@v3s
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile.dev --tag kinggstark/docker
 
-   runs-on: ubuntu-latest
+  test:
+    runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: test the code
-      run: docker run kinggstark/docker npm run test -- --coverage
+      - uses: actions/checkout@v3
+      - name: test the code
+        run: docker run kinggstark/docker npm run test -- --coverage
