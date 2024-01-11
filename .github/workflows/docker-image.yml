@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: build & push image
-    run: |
-      echo "${{secrets.DOCKERPW}}" | docker login -u "kinggstark" --password-stdin
-      docker image build -t kinggstark/docker .
-      docker push kinggstark/docker
+      run: |
+        echo "${{secrets.DOCKERPW}}" | docker login -u "kinggstark" --password-stdin
+        docker image build -t kinggstark/docker .
+        docker push kinggstark/docker
