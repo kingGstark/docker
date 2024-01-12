@@ -32,9 +32,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: docker build -t kinggstark/docker  -f Dockerfile.dev .
-      - run: docker run kinggstark/docker
-      
       - name: Generate deployment package
         run: zip -r deploy.zip . -x '*.git*'
 
