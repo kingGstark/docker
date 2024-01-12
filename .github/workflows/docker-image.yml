@@ -25,8 +25,9 @@ jobs:
       - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - run: docker build -t kinggstark/docker  -f Dockerfile.dev .
       - run: docker run -e CI=true kinggstark/docker npm test
+      
       - name: Generate deployment package
-      - run: zip -r deploy.zip . -x '*.git*'
+        run: zip -r deploy.zip . -x '*.git*'
   
   # deploy:
   #   needs: test
