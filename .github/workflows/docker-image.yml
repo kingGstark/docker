@@ -26,14 +26,20 @@ jobs:
       - run: docker build -t kinggstark/docker  -f Dockerfile.dev .
       - run: docker run -e CI=true kinggstark/docker npm test
 
-      - name: Generate deployment package
-        run: zip -r deploy.zip . -x '*.git*'
+     
   
   deploy:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: einaregilsson/beanstalk-deploy@v18
+      - uses: actions/checkout@v3
+      - run: docker run kinggstark/docker
+      
+      - name: Generate deployment package
+        run: zip -r deploy.zip . -x '*.git*'
+
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v18
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
           aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
